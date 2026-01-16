@@ -1,0 +1,46 @@
+services:
+  db:
+    image: postgres:15-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=sentinel
+      - POSTGRES_PASSWORD=sentinel_pass
+      - POSTGRES_DB=sentinel_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  queue:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+
+  engine:
+    build: ./engine
+    ports:
+      - "8000:8000"
+    environment:
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - ETHERSCAN_API_KEY=${ETHERSCAN_API_KEY}
+      - FRONTEND_URL=http://frontend:3000
+    depends_on:
+      - queue
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - DATABASE_URL=postgresql://sentinel:sentinel_pass@db:5432/sentinel_db
+      - ENGINE_URL=http://engine:8000
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - ETHERSCAN_API_KEY=${ETHERSCAN_API_KEY}
+      - INNGEST_EVENT_KEY=${INNGEST_EVENT_KEY}
+      - INNGEST_SIGNING_KEY=${INNGEST_SIGNING_KEY}
+    depends_on:
+      - db
+      - engine
+
+volumes:
+  postgres_data:
