@@ -97,8 +97,9 @@ For detailed architecture diagrams and flow charts, see [docs/ARCHITECTURE.md](d
 | **Patch Generation** | Manual Developer Work | AI-Generated Solidity Refactoring |
 
 ---
-p
+
 ## 🛠️ Enhanced Repo Architecture (The Senior Developer Setup)
+
 
 ### 🧬 Observability & Telemetry
 

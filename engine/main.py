@@ -65,25 +65,8 @@ async def log_requests(request: Request, call_next):
         logger.error(f"Request failed after {process_time:.3f}s: {str(e)}")
         raise
 
-# Request logging middleware
-@app.middleware("http")
-async def log_requests(request: Request, call_next):
-    """Log all requests for observability."""
-    start_time = time.time()
-    logger.info(f"Request: {request.method} {request.url.path}")
-    
-    try:
-        response = await call_next(request)
-        process_time = time.time() - start_time
-        logger.info(f"Response: {response.status_code} - {process_time:.3f}s")
-        response.headers["X-Process-Time"] = str(process_time)
-        return response
-    except Exception as e:
-        process_time = time.time() - start_time
-        logger.error(f"Request failed after {process_time:.3f}s: {str(e)}")
-        raise
-
 # Global exception handler
+
 @app.exception_handler(Exception)
 async def global_exception_handler(request: Request, exc: Exception):
     """Handle unhandled exceptions gracefully."""
