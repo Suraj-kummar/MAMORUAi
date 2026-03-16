@@ -1,0 +1,1 @@
+﻿lib/prisma.ts(10,9): error TS2353: Object literal may only specify known properties, and 'url' does not exist in type 'SqlDriverAdapterFactory'.

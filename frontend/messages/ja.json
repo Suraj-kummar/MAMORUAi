@@ -1,0 +1,41 @@
+{
+    "common": {
+        "appName": "MamoruAI",
+        "tagline": "Web3のゼロG セキュリティ"
+    },
+    "dashboard": {
+        "title": "コマンドセンター",
+        "subtitle": "スマートコントラクトのセキュリティを監視・分析",
+        "newAudit": "新規セキュリティ監査",
+        "recentAudits": "最近の監査",
+        "contractAddress": "コントラクトアドレス",
+        "enterAddress": "コントラクトアドレスを入力 (0x...)",
+        "triggerAudit": "セキュリティ監査を開始",
+        "scanning": "スキャン中...",
+        "viewResults": "結果を表示"
+    },
+    "audit": {
+        "status": {
+            "PENDING": "保留中",
+            "IN_PROGRESS": "進行中",
+            "COMPLETED": "完了",
+            "FAILED": "失敗"
+        },
+        "score": "セキュリティスコア",
+        "vulnerabilities": "検出された脆弱性",
+        "critical": "クリティカル",
+        "high": "高",
+        "medium": "中",
+        "low": "低",
+        "informational": "情報",
+        "aiReport": "AI分析レポート",
+        "slitherResults": "Slither分析",
+        "noVulnerabilities": "脆弱性は検出されませんでした",
+        "summary": "概要"
+    },
+    "errors": {
+        "invalidAddress": "無効なEthereumアドレス",
+        "fetchFailed": "監査結果の取得に失敗しました",
+        "scanFailed": "セキュリティスキャンに失敗しました"
+    }
+}

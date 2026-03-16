@@ -1,0 +1,82 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Contract {
+  id        String   @id @default(cuid())
+  address   String   @unique
+  chain     String   @default("ethereum")
+  name      String?
+  sourceCode String? @db.Text
+  bytecode  String?  @db.Text
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  audits    Audit[]
+  
+  @@index([address])
+  @@index([chain])
+}
+
+model Audit {
+  id           String   @id @default(cuid())
+  contractId   String
+  contract     Contract @relation(fields: [contractId], references: [id], onDelete: Cascade)
+  
+  status       AuditStatus @default(PENDING)
+  score        Int?
+  summary      String?      @db.Text
+  detailReport String?      @db.Text
+  slitherRaw   Json?
+  
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  completedAt  DateTime?
+  
+  vulnerabilities Vulnerability[]
+  
+  @@index([contractId])
+  @@index([status])
+  @@index([createdAt])
+}
+
+model Vulnerability {
+  id          String   @id @default(cuid())
+  auditId     String
+  audit       Audit    @relation(fields: [auditId], references: [id], onDelete: Cascade)
+  
+  type        String
+  severity    Severity
+  description String   @db.Text
+  location    String?
+  lineNumbers Int[]
+  markdown    String?  @db.Text
+  confidence  String?
+  
+  createdAt   DateTime @default(now())
+  
+  @@index([auditId])
+  @@index([severity])
+}
+
+enum AuditStatus {
+  PENDING
+  IN_PROGRESS
+  COMPLETED
+  FAILED
+}
+
+enum Severity {
+  CRITICAL
+  HIGH
+  MEDIUM
+  LOW
+  INFORMATIONAL
+}

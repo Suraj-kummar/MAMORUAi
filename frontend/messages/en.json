@@ -1,0 +1,41 @@
+{
+  "common": {
+    "appName": "MamoruAI",
+    "tagline": "Zero-G Security for Web3"
+  },
+  "dashboard": {
+    "title": "COMMAND CENTER",
+    "subtitle": "Monitor and analyze smart contract security",
+    "newAudit": "New Security Audit",
+    "recentAudits": "Recent Audits",
+    "contractAddress": "Contract Address",
+    "enterAddress": "Enter contract address (0x...)",
+    "triggerAudit": "Trigger Security Audit",
+    "scanning": "Scanning...",
+    "viewResults": "View Results"
+  },
+  "audit": {
+    "status": {
+      "PENDING": "Pending",
+      "IN_PROGRESS": "In Progress",
+      "COMPLETED": "Completed",
+      "FAILED": "Failed"
+    },
+    "score": "Security Score",
+    "vulnerabilities": "Vulnerabilities Found",
+    "critical": "Critical",
+    "high": "High",
+    "medium": "Medium",
+    "low": "Low",
+    "informational": "Informational",
+    "aiReport": "AI Analysis Report",
+    "slitherResults": "Slither Analysis",
+    "noVulnerabilities": "No vulnerabilities detected",
+    "summary": "Summary"
+  },
+  "errors": {
+    "invalidAddress": "Invalid Ethereum address",
+    "fetchFailed": "Failed to fetch audit results",
+    "scanFailed": "Security scan failed"
+  }
+}
